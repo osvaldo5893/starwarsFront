@@ -1,0 +1,116 @@
+<div class="text-900 font-bold text-2xl mb-4 text-center">Busqueda de Personaje</div>
+
+<div class="card" style="padding-left: 1rem;">
+  <p-panel header=""
+    class="line-height-12 m-0">
+    <!-- INICIO DE INPUTS -->
+    <!-- <h5>Tipo de Cuenta</h5> -->
+    <div class="p-fluid p-formgrid grid">
+      <div class="field col-12 md:col-12">
+      </div>
+
+
+    </div>
+    <!-- BOTON DE EJECUCION -->
+    <div class="col lg:col-12" [formGroup]="formBusqueda">
+      <div class="grid flex justify-content-between">
+        <div class="field col-12 md:col-8 text-center">
+          <p-autoComplete 
+            formControlName="nombre" 
+            [dropdown]="true" 
+            [showClear]="true"
+            [suggestions]="nombress" 
+            (completeMethod)="filterName($event)"
+            [style]="{'width':'100%'}"
+          >
+          </p-autoComplete>
+        </div>
+        <div class="field col-12 md:col-4 text-center">
+          <button
+            type="button"
+            (click)="buscar()"
+            pButton
+            label="Buscar"
+            [style]="{'width':'100%'}"
+            [disabled]="formBusqueda.invalid"  
+          ></button>
+        </div>
+      </div>
+    </div>
+    <!-- INICIO de Personajes -->
+    <div class="p-fluid p-formgrid grid">
+      <div class="field col-12 sm:col-12 " *ngIf="personaje">
+          <div class="p-card shadow-8 md:col-8 col-offset-2" style="height: auto; border-radius:5%;">
+            <div class="p-card-header flex justify-content-center py-3 px-2">
+              <h2> {{ personaje.id?personaje.id:'' }} - {{ personaje.name?personaje.name.substring(0,15):'' }} </h2>
+            </div>
+            <div class="p-card-body">
+              <div class="p-fluid p-formgrid grid px-5 py-0">
+
+                <div class="field col-7 sm:col-12 md:col-7">
+                  <img :src="{{ personaje.image?personaje.image:'' }}" alt="Descripción de la imagen" class="card-image px-4 py-0" style="width: 100%; overflow: hidden;height: 100%; margin-bottom: -3rem; border-radius: 50%; ">
+                </div>
+                <div class="field col-5 sm:col-12 md:col-5">
+                  <div class="grid" style="margin-top: 5rem;">
+                    <div class="col-12">
+                      <p> <strong>Sexo: </strong> {{ personaje.gender?personaje.gender:'' }} </p>
+                    </div>
+                    <div class="col-12">
+                      <p> <strong>Especie: </strong> {{ personaje.species?personaje.species:'' }} </p>
+                    </div>
+                    <div class="col-12">
+                      <p> <strong>Estatus: </strong> {{ personaje.status?personaje.status:'' }} </p>
+                    </div>
+                    <div class="col-12">
+                      <p> <strong>Origen: </strong> {{ personaje.origin.name?personaje.origin.name:'' }} </p>
+                    </div>
+                    <div class="col-12">
+                      <p> <strong>Creado: </strong> {{ personaje.created?dateFormat(personaje.created):'' }} </p>
+                    </div>
+                    <div class="col-12">
+                      <p> <strong>Localidad: </strong> {{ personaje.location.name?personaje.location.name:'' }} </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="field col-12 sm:col-12 md:col-12">
+                  <p-table [rowHover]="true" 
+                    [value]="personaje.episode" 
+                    [tableStyle]="{ 'min-width': '50rem' }"
+                    [style]="{'width':'100%','overflow-x':'hidden'}"
+                  >
+                    <ng-template pTemplate="header" class="flex justify-content-center">
+                        <tr >
+                            <th colspan="2">Episodios donde sale este personaje:</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-ep let-columns="columns">
+                        <tr>
+                          <td>
+                            Episodio: 
+                          </td>
+                            <td >
+                                {{ episodiosView(ep) }}
+                            </td>
+                        </tr>
+                    </ng-template>
+                  </p-table>
+                 </div>
+
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+
+
+
+
+
+  </p-panel>
+  <br>
+
+</div>
+
+<p-toast
+  [baseZIndex]="99999"
+  key="tst"></p-toast>

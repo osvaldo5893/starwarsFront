@@ -1,0 +1,115 @@
+<div class="text-900 font-bold text-2xl mb-4 text-center">Residentes</div>
+
+<div class="card" style="padding-left: 1rem;">
+  <p-panel header=""
+    class="line-height-12 m-0">
+    <!-- BOTON DE Busqueda -->
+    <div class="col lg:col-12" [formGroup]="formBusqueda">
+      <div class="grid flex justify-content-between">
+        <div class="field col-12 md:col-8 text-center">
+          <p-autoComplete 
+            formControlName="origen" 
+            [dropdown]="true" 
+            [showClear]="true"
+            [suggestions]="nombress" 
+            (completeMethod)="filterName($event)"
+            [style]="{'width':'100%'}"
+          >
+          </p-autoComplete>
+        </div>
+        <div class="field col-12 md:col-4 text-center">
+          <button
+            type="button"
+            (click)="buscar()"
+            pButton
+            label="Buscar"
+            [style]="{'width':'100%'}"
+            [disabled]="formBusqueda.invalid"  
+          ></button>
+        </div>
+      </div>
+    </div>
+        <!-- INICIO de Personajes -->
+        <div class="p-fluid p-formgrid grid" *ngIf="!region">
+          <div class="field col-12 sm:col-12 md:col-4" *ngFor="let location of locaciones?locaciones:[]">
+              <div class="p-card shadow-8" style="height: 100%;">
+                <div class="p-card-header flex justify-content-center py-2 px-5">
+                  <h2> {{ location.id?location.id:'' }}  </h2>
+                </div>
+                <div class="p-card-body">
+                  <div class="p-fluid p-formgrid grid px-5 py-0">
+                    <div class="field col-12 sm:col-12 md:col-12" >
+                      <p> <strong>Nombre: </strong> {{location.name?location.name.substring(0,15):''}} </p>
+                    </div>
+                    <div class="field col-12 sm:col-12 md:col-12" >
+                      <p> <strong>Dimensión: </strong> {{location.dimension?location.dimension:''}} </p>
+                    </div>
+                    <div class="field col-12 sm:col-12 md:col-12">
+                      <p> <strong>Tipo: </strong> {{location.type?location.type:''}} </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="p-fluid p-formgrid grid" *ngIf="region">
+        <div class="field col-12 sm:col-12 md:col-10 col-offset-1">
+          <div class="p-card shadow-8" style="height: 100%;">
+            <div class="p-card-header flex justify-content-center py-2 px-5">
+              <h2> {{ region.id?region.id:'' }}  </h2>
+            </div>
+            <div class="p-card-body">
+              <div class="p-fluid p-formgrid grid px-5 py-0">
+                <div class="field col-12 sm:col-12 md:col-12" >
+                  <p> <strong>Nombre: </strong> {{region.name?region.name.substring(0,15):''}} </p>
+                </div>
+                <div class="field col-12 sm:col-12 md:col-12" >
+                  <p> <strong>Dimensión: </strong> {{region.dimension?region.dimension:''}} </p>
+                </div>
+                <div class="field col-12 sm:col-12 md:col-12">
+                  <p> <strong>Tipo: </strong> {{region.type?region.type:''}} </p>
+                </div>
+                <div class="">
+                      <!-- INICIO de Personajes -->
+                  <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 sm:col-12 md:col-4" *ngFor="let persona of personajes?personajes:[]">
+                        <div class="p-card shadow-8" style="height: 100%;">
+                          <div class="p-card-header flex justify-content-center py-3 px-2">
+                            <h2> {{ persona.id?persona.id:'' }} - {{ persona.name?persona.name.substring(0,15):'' }} </h2>
+                          </div>
+                          <div class="p-card-body">
+                            <div class="p-fluid p-formgrid grid px-5 py-0">
+                              <div class="field col-12">
+                                <img :src="{{ persona.image?persona.image:'' }}" alt="Descripción de la imagen" class="card-image px-5 py-0 " style="width: 100%; overflow: hidden;height: 100%; margin-bottom: -3rem;">
+                              </div>
+                              <div class="field col-6 sm:col-12 md:col-6" >
+                                <p> <strong>Sexo: </strong> {{ persona.gender?persona.gender:'' }} </p>
+                              </div>
+                              <div class="field col-6 sm:col-12 md:col-6">
+                                <p> <strong>Especie: </strong> {{ persona.species?persona.species:'' }} </p>
+                              </div>
+                              <div class="field col-6 sm:col-12 md:col-6">
+                                <p> <strong>Estatus: </strong> {{ persona.status?persona.status:'' }} </p>
+                              </div>
+                              <div class="field col-6 sm:col-12 md:col-6">
+                                <p> <strong>Origen: </strong> {{ persona.origin.name?persona.origin.name:'' }} </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      </div>
+  
+
+  </p-panel>
+  <br>
+
+</div>
