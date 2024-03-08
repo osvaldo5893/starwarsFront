@@ -29,7 +29,7 @@ import { PrimengModule } from './modules/primeng/primeng.module';
     ProfilemenuComponent,
     SidebarComponent,
     TopbarComponent,
-    NotfoundComponent1
+    NotfoundComponent1,
   ],
   imports: [
     BrowserModule,
