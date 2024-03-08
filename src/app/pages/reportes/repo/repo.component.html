@@ -72,7 +72,7 @@
                 </div>
                 <div class="">
                       <!-- INICIO de Personajes -->
-                  <div class="p-fluid p-formgrid grid">
+                  <div class="p-fluid p-formgrid grid" *ngIf="personajes && personajes.length>1">
                     <div class="field col-12 sm:col-12 md:col-4" *ngFor="let persona of personajes?personajes:[]">
                         <div class="p-card shadow-8" style="height: 100%;">
                           <div class="p-card-header flex justify-content-center py-3 px-2">

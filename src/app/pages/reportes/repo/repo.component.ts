@@ -75,6 +75,7 @@ export class RepoComponent implements OnInit{
       this.cors.get(this.url,{
         name:this.formBusqueda.controls['origen'].value
       }).then((res)=>{
+        this.region = null;
         this.region= res.results[0];
         // console.log(this.region)
         if(this.region.residents){
@@ -90,6 +91,7 @@ export class RepoComponent implements OnInit{
         let stringNumeros = arraySinComillas.join(',');
         // console.log("stringNumeros",stringNumeros)
         this.cors.get(`/character/${stringNumeros}`).then((res)=>{
+          this.personajes= null;
           this.personajes = res;
           // console.log(this.personajes)
         }).catch((err)=>{
