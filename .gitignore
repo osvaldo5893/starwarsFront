@@ -5,7 +5,7 @@
 /tmp
 /out-tsc
 /bazel-out
-
+proxy.conf.js
 .firebase
 .firebaserc
 firebase.json
